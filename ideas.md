@@ -13,3 +13,8 @@ test idea from terminal
 _2026-07-08T08:32:33.594Z_
 
 Want to make a roast camera with a raspi and thermal printer. Local LLM isn’t possible and Internet connection is shitty, so add local tflite for objects and then hardcoded roasts. Gut an old Polaroid and fit it in there?
+
+## Raspberry Pi Roast Camera with Thermal Printer
+_2026-07-08T08:35:13.956Z_
+
+Want to make a roast camera with a raspi and thermal printer. Local LLM isn’t possible and Internet connection is shitty, so add local tflite for objects and then hardcoded roasts. Gut an old Polaroid and fit it in there?
