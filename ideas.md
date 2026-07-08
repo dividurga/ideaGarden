@@ -13,3 +13,8 @@ Want to make a roast camera with a raspi and thermal printer. Local LLM isn’t 
 _2026-07-08T08:53:01.255Z_ · `ceramics` · `blocked: materials`
 
 Want to build a stackable set of glasses that look like a fish when stacked together out of ceramics. Don’t have access to a studio right now but will make once back on campus
+
+## Ceramic Shoe Sculpture
+_2026-07-08T08:54:03.312Z_ · `ceramics` · `blocked: materials`
+
+A ceramic shoe bcs why not. No studio access right now but will make once back on campus
