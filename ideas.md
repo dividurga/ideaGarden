@@ -28,3 +28,8 @@ A camera in a tin can I picked up from London. Working on it right now!
 _2026-07-08T08:55:22.774Z_ · `electronics`
 
 An ESP32 based camera crammed in a tin can I picked up from London. Working on it right now!
+
+## Idea Garden Website Visualization
+_2026-07-08T08:58:19.419Z_ · `other` · `blocked: technical`
+
+A website that’s a garden of these swaying little flowers, where a flower spawns every time I have an idea. Should be seamlessly connected to WhatsApp or notes or somewhere I usually dump thoughts…flower colour and size can be a function of what catergory of idea it is and why I’m blocked. Watering can can indicate ideas I’m working on. Completed ideas can have hyperlinks to blog about ideas. Possibly integrate into my website??? Wordpress might be painful. Working on this rn!
