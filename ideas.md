@@ -18,3 +18,8 @@ Want to build a stackable set of glasses that look like a fish when stacked toge
 _2026-07-08T08:54:03.312Z_ · `ceramics` · `blocked: materials`
 
 A ceramic shoe bcs why not. No studio access right now but will make once back on campus
+
+## Camera in a Tin Can
+_2026-07-08T08:54:56.879Z_ · `art`
+
+A camera in a tin can I picked up from London. Working on it right now!
