@@ -3,36 +3,325 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>ideaGarden</title>
+  <title>divija's idea garden</title>
   <style>
+    /*
+      MOCKUP — placeholder flower art (CSS-drawn SVGs below). Intended to be
+      swapped out for real illustrated flower art later. Everything about how
+      a flower looks lives in renderFlowerSvg() and TAG_COLORS — replace those
+      with <img> tags pointing at real art and the rest keeps working.
+    */
     html, body {
-      height: 100%;
       margin: 0;
-      display: flex;
+      min-height: 100%;
+      background: linear-gradient(180deg, #eaf6ec 0%, #dcefe0 100%);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      overflow-x: hidden;
+    }
+    @media (prefers-color-scheme: dark) {
+      html, body {
+        background: linear-gradient(180deg, #101512 0%, #161d18 100%);
+      }
+    }
+
+    header {
+      text-align: center;
+      padding: 2.5rem 1rem 1rem;
+      color: #2f4030;
+    }
+    header h1 {
+      margin: 0 0 0.25rem;
+      font-size: 2rem;
+    }
+    header p {
+      margin: 0;
+      color: #5a6d5c;
+      font-size: 0.95rem;
+    }
+    @media (prefers-color-scheme: dark) {
+      header { color: #dbe7dc; }
+      header p { color: #93a596; }
+    }
+
+    #field {
+      position: relative;
+      width: 100%;
+      height: 75vh;
+      min-height: 480px;
+    }
+
+    .flower {
+      position: absolute;
+      cursor: pointer;
+      transform-origin: bottom center;
+      animation: sway 4s ease-in-out infinite;
+      transition: transform 0.15s ease;
+    }
+    .flower:hover {
+      transform: scale(1.12) !important;
+    }
+    .flower svg {
+      display: block;
+      width: 100%;
+      height: 100%;
+      filter: drop-shadow(0 3px 4px rgba(0, 0, 0, 0.15));
+    }
+
+    @keyframes sway {
+      0%, 100% { transform: rotate(-4deg); }
+      50% { transform: rotate(4deg); }
+    }
+
+    #empty-state {
+      text-align: center;
+      color: #6b7d6d;
+      padding: 3rem 1rem;
+    }
+
+    /* Popup */
+    #overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(20, 30, 20, 0.45);
+      display: none;
       align-items: center;
       justify-content: center;
-      background: #0f1115;
-      color: #f5f5f5;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      text-align: center;
+      padding: 1rem;
+      z-index: 10;
     }
-    main {
-      padding: 2rem;
+    #overlay.open { display: flex; }
+
+    #popup {
+      background: #fffdf8;
+      color: #26301f;
+      border-radius: 16px;
+      max-width: 480px;
+      width: 100%;
+      max-height: 80vh;
+      overflow-y: auto;
+      padding: 1.5rem 1.75rem;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
     }
-    h1 {
-      font-size: 2.5rem;
-      margin-bottom: 0.5rem;
+    @media (prefers-color-scheme: dark) {
+      #popup { background: #1d2419; color: #e7efe3; }
     }
-    p {
-      color: #a0a0a0;
+
+    #popup h2 {
+      margin: 0 0 0.4rem;
+      font-size: 1.3rem;
+    }
+    #popup .meta {
+      font-size: 0.8rem;
+      color: #7a8a78;
+      margin-bottom: 1rem;
+    }
+    #popup .meta .pill {
+      display: inline-block;
+      padding: 0.1rem 0.5rem;
+      border-radius: 999px;
+      background: #e4ede2;
+      color: #46573f;
+      margin-right: 0.3rem;
+      font-size: 0.72rem;
+    }
+    @media (prefers-color-scheme: dark) {
+      #popup .meta .pill { background: #2a3524; color: #c3d3bd; }
+    }
+    #popup .pill.blocked {
+      background: #f6ded4;
+      color: #8a4a2c;
+    }
+    @media (prefers-color-scheme: dark) {
+      #popup .pill.blocked { background: #4a2e20; color: #f0b898; }
+    }
+    #popup .body {
+      line-height: 1.5;
+      white-space: pre-wrap;
+    }
+    #popup.about .body {
+      white-space: normal;
+    }
+    #popup.about .body p:first-child { margin-top: 0; }
+    #popup button.close {
+      float: right;
+      border: none;
+      background: none;
       font-size: 1.1rem;
+      cursor: pointer;
+      color: inherit;
+      opacity: 0.6;
+    }
+    #popup button.close:hover { opacity: 1; }
+
+    #about-btn {
+      position: absolute;
+      top: 1.5rem;
+      right: 1.5rem;
+      border: none;
+      background: none;
+      font-size: 1.4rem;
+      cursor: pointer;
+      color: #5a6d5c;
+      opacity: 0.7;
+    }
+    #about-btn:hover { opacity: 1; }
+    @media (prefers-color-scheme: dark) {
+      #about-btn { color: #93a596; }
+    }
+
+    #popup.about ol, #popup.about ul {
+      padding-left: 1.2rem;
+      line-height: 1.5;
+    }
+    #popup.about .placeholder-note {
+      margin-top: 1rem;
+      font-size: 0.85rem;
+      font-style: italic;
+      color: #7a8a78;
+    }
+    @media (prefers-color-scheme: dark) {
+      #popup.about .placeholder-note { color: #93a596; }
     }
   </style>
 </head>
 <body>
-  <main>
-    <h1>ideaGarden</h1>
-    <p>Coming soon.</p>
-  </main>
+  <header>
+    <button id="about-btn" aria-label="About Idea Garden" title="What's Idea Garden?">ⓘ</button>
+    <h1>divija's idea garden</h1>
+    <p>a garden of my very unorganised ideas. i keep them here so i always have something to come back to, for whenever i have time, resources, or just want to make something. these are hastily written notes, not polished plans.</p>
+  </header>
+
+  <div id="field"></div>
+
+  <div id="overlay">
+    <div id="popup">
+      <button class="close" aria-label="Close">✕</button>
+      <h2 id="popup-title"></h2>
+      <div class="meta" id="popup-meta"></div>
+      <div class="body" id="popup-body"></div>
+    </div>
+  </div>
+
+  <script>
+    const TAG_COLORS = {
+      electronics: { petal: "#7fb0d8", center: "#f4d35e" },
+      ceramics:    { petal: "#e28f6b", center: "#fff1cf" },
+      art:         { petal: "#c08bd8", center: "#fbeaff" },
+      other:       { petal: "#8fbf7f", center: "#fff6d1" },
+    };
+
+    function parseIdeas(markdown) {
+      const chunks = markdown.split(/\n(?=## )/).map((c) => c.trim()).filter(Boolean);
+      return chunks.map((chunk) => {
+        const lines = chunk.split("\n");
+        const title = lines[0].replace(/^##\s*/, "").trim();
+        const metaLine = lines[1] || "";
+        const [timestampPart, ...pillParts] = metaLine.split(" · ");
+        const timestamp = timestampPart.replace(/_/g, "").trim();
+        const tagMatch = pillParts.find((p) => /^`\w[\w-]*`$/.test(p.trim()));
+        const tag = tagMatch ? tagMatch.trim().replace(/`/g, "") : "other";
+        const blockedMatch = pillParts.find((p) => p.includes("blocked:"));
+        const blockers = blockedMatch
+          ? blockedMatch.replace(/`/g, "").replace("blocked:", "").split(",").map((s) => s.trim()).filter(Boolean)
+          : [];
+        const body = lines.slice(2).join("\n").trim();
+        return { title, timestamp, tag, blockers, body };
+      });
+    }
+
+    function renderFlowerSvg(colors) {
+      return `
+        <svg viewBox="0 0 100 140">
+          <line x1="50" y1="140" x2="50" y2="60" stroke="#5a8a52" stroke-width="4" />
+          <g transform="translate(50,45)">
+            ${[0, 72, 144, 216, 288].map((angle) => `
+              <ellipse cx="0" cy="-22" rx="12" ry="20" fill="${colors.petal}"
+                transform="rotate(${angle})" />
+            `).join("")}
+            <circle r="12" fill="${colors.center}" />
+          </g>
+        </svg>
+      `;
+    }
+
+    function openPopup(idea) {
+      document.getElementById("popup").classList.remove("about");
+      document.getElementById("popup-title").textContent = idea.title;
+      const pills = [`<span class="pill">${idea.tag}</span>`];
+      if (idea.blockers.length) {
+        pills.push(`<span class="pill blocked">blocked: ${idea.blockers.join(", ")}</span>`);
+      }
+      const date = new Date(idea.timestamp);
+      const dateLabel = isNaN(date) ? idea.timestamp : date.toLocaleString();
+      document.getElementById("popup-meta").innerHTML = `${dateLabel}<br>${pills.join(" ")}`;
+      document.getElementById("popup-body").textContent = idea.body;
+      document.getElementById("overlay").classList.add("open");
+    }
+
+    function openAboutPopup() {
+      document.getElementById("popup").classList.add("about");
+      document.getElementById("popup-title").textContent = "What's Idea Garden?";
+      document.getElementById("popup-meta").innerHTML = "";
+      document.getElementById("popup-body").innerHTML = `
+        <p>A garden of my very unorganised ideas, so I always have a source of inspiration lying around. These are hastily written notes, not polished plans.</p>
+        <p><strong>What I see up front:</strong> I send an idea, and a flower spawns. That's it.</p>
+
+        <p><strong>Under the hood:</strong></p>
+        <ol>
+          <li>I share a thought (a note, a dictated ramble, whatever) via an iOS Shortcut.</li>
+          <li>It gets sent to a small Cloudflare Worker, which asks Claude to give it a title, guess a category (electronics / ceramics / art / other), and flag anything I mentioned being blocked on (time, materials, technical, etc.).</li>
+          <li>That gets committed as a new entry to <code>ideas.md</code> in this repo.</li>
+          <li>This page just reads <code>ideas.md</code> and draws each entry as a flower — colored by category, click to read the note.</li>
+        </ol>
+        <p class="placeholder-note">Still a placeholder — the flowers are just CSS shapes for now, I'll swap in real art at some point.</p>
+      `;
+      document.getElementById("overlay").classList.add("open");
+    }
+
+    function closePopup() {
+      document.getElementById("overlay").classList.remove("open");
+    }
+
+    document.getElementById("overlay").addEventListener("click", (e) => {
+      if (e.target.id === "overlay" || e.target.closest(".close")) closePopup();
+    });
+
+    document.getElementById("about-btn").addEventListener("click", openAboutPopup);
+
+    async function init() {
+      const field = document.getElementById("field");
+      let ideas = [];
+      try {
+        const res = await fetch("./ideas.md", { cache: "no-store" });
+        if (res.ok) ideas = parseIdeas(await res.text());
+      } catch {
+        // network/file access issue — fall through to empty state below
+      }
+
+      if (!ideas.length) {
+        field.innerHTML = `<div id="empty-state">no flowers yet — go have an idea 🌱</div>`;
+        return;
+      }
+
+      ideas.forEach((idea) => {
+        const colors = TAG_COLORS[idea.tag] || TAG_COLORS.other;
+        const size = 70 + Math.min(idea.body.length / 10, 40);
+        const el = document.createElement("div");
+        el.className = "flower";
+        el.style.left = `${2 + Math.random() * 88}%`;
+        el.style.top = `${5 + Math.random() * 75}%`;
+        el.style.width = `${size}px`;
+        el.style.height = `${size * 1.4}px`;
+        el.style.animationDuration = `${3.5 + Math.random() * 2.5}s`;
+        el.style.animationDelay = `${Math.random() * -4}s`;
+        el.innerHTML = renderFlowerSvg(colors);
+        el.title = idea.title;
+        el.addEventListener("click", () => openPopup(idea));
+        field.appendChild(el);
+      });
+    }
+
+    init();
+  </script>
 </body>
 </html>
