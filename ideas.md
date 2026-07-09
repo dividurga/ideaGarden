@@ -38,3 +38,8 @@ A bag made with old denim. Use the two pairs I don’t wear anymore and turn the
 _2026-07-09T17:57:48.399Z_ · `ceramics` · `blocked: materials`
 
 An Apple core jewelry holder out of clay. Basically upgrade my existing Apple core to have a worm or a longer stem so that I can store my rings. I’ll make it when I have access to the studio again
+
+## VFD Tube Clock
+_2026-07-09T18:00:18.801Z_ · `electronics` · `blocked: materials, time`
+
+VFD tube clock. Nixie tube clocks are all over but Nixie tubes are hard to find so I’ve bought some VFD tubes. Need a lot of supplies and time for this but I do eventually want to make this
