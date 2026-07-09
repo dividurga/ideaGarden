@@ -1,0 +1,97 @@
+{
+  "rhombus-1.png": {
+    "pivotX": 0.9238,
+    "pivotY": 0.2821,
+    "awayAngle": -107.14
+  },
+  "rhombus-2.png": {
+    "pivotX": 0.0729,
+    "pivotY": 0.3929,
+    "awayAngle": 96.34
+  },
+  "rhombus-3.png": {
+    "pivotX": 0.0751,
+    "pivotY": 0.2615,
+    "awayAngle": 107.44
+  },
+  "rhombus-4.png": {
+    "pivotX": 0.0732,
+    "pivotY": 0.393,
+    "awayAngle": 102.54
+  },
+  "rhombus-5.png": {
+    "pivotX": 0.9245,
+    "pivotY": 0.2774,
+    "awayAngle": -106.21
+  },
+  "rhombus-6.png": {
+    "pivotX": 0.0743,
+    "pivotY": 0.4001,
+    "awayAngle": 95.45
+  },
+  "rhombus-7.png": {
+    "pivotX": 0.9232,
+    "pivotY": 0.5789,
+    "awayAngle": -77.34
+  },
+  "rhombus-8.png": {
+    "pivotX": 0.0718,
+    "pivotY": 0.2976,
+    "awayAngle": 105.77
+  },
+  "rhombus-9.png": {
+    "pivotX": 0.9212,
+    "pivotY": 0.3315,
+    "awayAngle": -100.36
+  },
+  "teardrop-1.png": {
+    "pivotX": 0.7498,
+    "pivotY": 0.9144,
+    "awayAngle": -12.61
+  },
+  "teardrop-10.png": {
+    "pivotX": 0.7272,
+    "pivotY": 0.917,
+    "awayAngle": -8.29
+  },
+  "teardrop-2.png": {
+    "pivotX": 0.7129,
+    "pivotY": 0.9114,
+    "awayAngle": -8.25
+  },
+  "teardrop-3.png": {
+    "pivotX": 0.7146,
+    "pivotY": 0.9153,
+    "awayAngle": -8.76
+  },
+  "teardrop-4.png": {
+    "pivotX": 0.6663,
+    "pivotY": 0.9162,
+    "awayAngle": -8.72
+  },
+  "teardrop-5.png": {
+    "pivotX": 0.6719,
+    "pivotY": 0.9198,
+    "awayAngle": -9.14
+  },
+  "teardrop-6.png": {
+    "pivotX": 0.7361,
+    "pivotY": 0.9213,
+    "awayAngle": -11.65
+  },
+  "teardrop-7.png": {
+    "pivotX": 0.6838,
+    "pivotY": 0.9091,
+    "awayAngle": -8.95
+  },
+  "teardrop-8.png": {
+    "pivotX": 0.6772,
+    "pivotY": 0.9233,
+    "awayAngle": -7.62
+  },
+  "teardrop-9.png": {
+    "pivotX": 0.7048,
+    "pivotY": 0.9168,
+    "awayAngle": -8.66
+  }
+}

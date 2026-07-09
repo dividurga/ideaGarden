@@ -101,4 +101,4 @@ Now you can share any text or note on your phone straight to this Worker, and it
 
 - [idea-garden-worker.js](idea-garden-worker.js) — the Worker source.
 - [wrangler.toml](wrangler.toml) — Worker config (non-secret env vars only).
-- [index.html](index.html) — placeholder page, served via GitHub Pages.
+- [index.html](index.html) — main idea garden page, served via GitHub Pages.

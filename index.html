@@ -3,71 +3,131 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>divija's idea garden</title>
+  <title>The Idea Garden</title>
   <style>
-    /*
-      MOCKUP — placeholder flower art (CSS-drawn SVGs below). Intended to be
-      swapped out for real illustrated flower art later. Everything about how
-      a flower looks lives in renderFlowerSvg() and TAG_COLORS — replace those
-      with <img> tags pointing at real art and the rest keeps working.
-    */
     html, body {
       margin: 0;
       min-height: 100%;
-      background: linear-gradient(180deg, #eaf6ec 0%, #dcefe0 100%);
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       overflow-x: hidden;
     }
-    @media (prefers-color-scheme: dark) {
-      html, body {
-        background: linear-gradient(180deg, #101512 0%, #161d18 100%);
-      }
+    body {
+      background-image: url("assets/background/field.png?v=2");
+      background-size: cover;
+      background-position: center top;
+      background-repeat: no-repeat;
     }
+
+    /*
+      Swirls share the exact same 1920x1600 canvas as field.png, so each is
+      overlaid full-bleed with the identical background-size/position as the
+      field — that's what keeps them aligned with the hills beneath them.
+      Only a small sway transform is applied; nothing is resized or moved.
+    */
+    .swirl {
+      position: fixed;
+      inset: 0;
+      background-size: cover;
+      background-position: center top;
+      background-repeat: no-repeat;
+      pointer-events: none;
+      z-index: 0;
+      animation: sway-swirl 14s ease-in-out infinite;
+    }
+    @keyframes sway-swirl {
+      0%, 100% { transform: translate(0, 0) rotate(0deg); }
+      50% { transform: translate(22px, -12px) rotate(0.6deg); }
+    }
+
+    header, #field { position: relative; z-index: 1; }
 
     header {
       text-align: center;
-      padding: 2.5rem 1rem 1rem;
-      color: #2f4030;
+      padding: 2.5rem 1.5rem 0;
+      color: #23331f;
+    }
+    header .header-card {
+      display: inline-block;
+      max-width: 620px;
+      padding: 1.1rem 1.75rem 1.3rem;
+      background: rgba(255, 253, 246, 0.72);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      border-radius: 20px;
+      box-shadow: 0 8px 28px rgba(30, 50, 30, 0.12);
     }
     header h1 {
-      margin: 0 0 0.25rem;
-      font-size: 2rem;
+      margin: 0 0 0.35rem;
+      font-size: 2.1rem;
+      font-weight: 700;
+      letter-spacing: -0.01em;
     }
     header p {
       margin: 0;
-      color: #5a6d5c;
-      font-size: 0.95rem;
+      color: #4b5c46;
+      font-size: 1rem;
+      line-height: 1.4;
     }
     @media (prefers-color-scheme: dark) {
-      header { color: #dbe7dc; }
-      header p { color: #93a596; }
+      header { color: #eef3ea; }
+      header .header-card {
+        background: rgba(20, 26, 18, 0.62);
+        box-shadow: 0 8px 28px rgba(0, 0, 0, 0.35);
+      }
+      header p { color: #c3d0bd; }
     }
 
     #field {
       position: relative;
       width: 100%;
-      height: 75vh;
-      min-height: 480px;
+      height: 78vh;
+      min-height: 520px;
     }
 
-    .flower {
+    .flower-plant {
       position: absolute;
       cursor: pointer;
       transform-origin: bottom center;
       animation: sway 4s ease-in-out infinite;
       transition: transform 0.15s ease;
+      filter: drop-shadow(0 3px 4px rgba(0, 0, 0, 0.15));
     }
-    .flower:hover {
+    .flower-plant:hover {
       transform: scale(1.12) !important;
     }
-    .flower svg {
-      display: block;
-      width: 100%;
-      height: 100%;
-      filter: drop-shadow(0 3px 4px rgba(0, 0, 0, 0.15));
+
+    .masked {
+      position: absolute;
+      background-color: var(--fill);
+      -webkit-mask-repeat: no-repeat;
+      mask-repeat: no-repeat;
+      -webkit-mask-position: center;
+      mask-position: center;
+      -webkit-mask-size: 100% 100%;
+      mask-size: 100% 100%;
+    }
+
+    .petal-outline {
+      position: absolute;
+      inset: -6%;
+      background-color: #14100c;
+      -webkit-mask-repeat: no-repeat;
+      mask-repeat: no-repeat;
+      -webkit-mask-position: center;
+      mask-position: center;
+      -webkit-mask-size: 100% 100%;
+      mask-size: 100% 100%;
     }
 
     @keyframes sway {
+      0%, 100% { transform: rotate(-4deg); }
+      50% { transform: rotate(4deg); }
+    }
+
+    .petal-shape {
+      animation: petal-wiggle 2.4s ease-in-out infinite;
+    }
+    @keyframes petal-wiggle {
       0%, 100% { transform: rotate(-4deg); }
       50% { transform: rotate(4deg); }
     }
@@ -185,10 +245,22 @@
   </style>
 </head>
 <body>
+  <div class="swirl" style="background-image: url('assets/background/swirl-1.png?v=2'); animation-delay: -1s; animation-duration: 13s;"></div>
+  <div class="swirl" style="background-image: url('assets/background/swirl-2.png?v=2'); animation-delay: -4s; animation-duration: 16s;"></div>
+  <div class="swirl" style="background-image: url('assets/background/swirl-3.png?v=2'); animation-delay: -7s; animation-duration: 14s;"></div>
+  <div class="swirl" style="background-image: url('assets/background/swirl-4.png?v=2'); animation-delay: -2s; animation-duration: 18s;"></div>
+  <div class="swirl" style="background-image: url('assets/background/swirl-5.png?v=2'); animation-delay: -9s; animation-duration: 15s;"></div>
+  <div class="swirl" style="background-image: url('assets/background/swirl-6.png?v=2'); animation-delay: -3s; animation-duration: 12s;"></div>
+  <div class="swirl" style="background-image: url('assets/background/swirl-7.png?v=2'); animation-delay: -6s; animation-duration: 17s;"></div>
+  <div class="swirl" style="background-image: url('assets/background/swirl-8.png?v=2'); animation-delay: -10s; animation-duration: 13s;"></div>
+  <div class="swirl" style="background-image: url('assets/background/swirl-9.png?v=2'); animation-delay: -5s; animation-duration: 16s;"></div>
+
   <header>
     <button id="about-btn" aria-label="About Idea Garden" title="What's Idea Garden?">ⓘ</button>
-    <h1>divija's idea garden</h1>
-    <p>a garden of my very unorganised ideas. i keep them here so i always have something to come back to, for whenever i have time, resources, or just want to make something. these are hastily written notes, not polished plans.</p>
+    <div class="header-card">
+      <h1>The Idea Garden</h1>
+      <p>I write ideas everywhere — a notebook, a WhatsApp chat, my Notes app — and send them here. Each one grows into its own flower.</p>
+    </div>
   </header>
 
   <div id="field"></div>
@@ -203,12 +275,279 @@
   </div>
 
   <script>
-    const TAG_COLORS = {
-      electronics: { petal: "#7fb0d8", center: "#f4d35e" },
-      ceramics:    { petal: "#e28f6b", center: "#fff1cf" },
-      art:         { petal: "#c08bd8", center: "#fbeaff" },
-      other:       { petal: "#8fbf7f", center: "#fff6d1" },
+    const ASSETS = {
+      centres: {
+        "flat-1": "assets/centres/flat-1.png",
+        "flat-2": "assets/centres/flat-2.png",
+        "round-1": "assets/centres/round-1.png",
+        "round-2": "assets/centres/round-2.png",
+        "round-3": "assets/centres/round-3.png",
+      },
+      teardrop: Array.from({ length: 10 }, (_, i) => `assets/petals/teardrop-${i + 1}.png`),
+      rhombus: Array.from({ length: 9 }, (_, i) => `assets/petals/rhombus-${i + 1}.png`),
+      stems: Array.from({ length: 7 }, (_, i) => `assets/stems/stem-${i + 1}.png`),
+      // leaf-3, leaf-5, leaf-6 are oval/pod shapes that read as little
+      // round centres, not leaves — excluded to avoid confusing the two.
+      leaves: ["assets/leaves/leaf-1.png", "assets/leaves/leaf-2.png", "assets/leaves/leaf-4.png"],
     };
+
+    const PALETTE = {
+      reds: ["#e18356", "#c75865"],
+      pinksPurples: ["#cfa19e", "#e48aa0", "#cb7f89", "#a68dae"],
+      yellows: ["#e7bb58", "#e8cd7d", "#eec346"],
+      blue: ["#4a90d9"],
+    };
+    const ALL_FLOWER_COLORS = [
+      ...PALETTE.reds,
+      ...PALETTE.pinksPurples,
+      ...PALETTE.yellows,
+      ...PALETTE.blue,
+    ];
+    // Warm dark brown/near-black — distinct from the stem's cool dark green
+    // so the centre never blends into it where the head overlaps the stem tip.
+    const DARK_CENTRE_COLORS = ["#241a12", "#1a120c", "#2e2013"];
+    const STEM_GREEN = "#1b2f0f";
+    const FLOWER_SCALE = 0.8;
+    const FLOWER_TYPES = ["ring", "ring-outward", "bottom-cluster", "big-rhombus"];
+    let STEM_CURVES = {};
+    let PETAL_PIVOTS = {};
+
+    function hashString(str) {
+      let h = 2166136261;
+      for (let i = 0; i < str.length; i++) {
+        h ^= str.charCodeAt(i);
+        h = Math.imul(h, 16777619);
+      }
+      return h >>> 0;
+    }
+
+    function mulberry32(seed) {
+      return function () {
+        seed |= 0;
+        seed = (seed + 0x6d2b79f5) | 0;
+        let t = Math.imul(seed ^ (seed >>> 15), 1 | seed);
+        t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+        return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+      };
+    }
+
+    function pick(rng, arr) {
+      return arr[Math.floor(rng() * arr.length)];
+    }
+    function pickInt(rng, min, max) {
+      return Math.floor(rng() * (max - min + 1)) + min;
+    }
+
+    function maskedEl(url, color) {
+      const d = document.createElement("div");
+      d.className = "masked";
+      d.style.setProperty("--fill", color);
+      d.style.webkitMaskImage = `url("${url}")`;
+      d.style.maskImage = `url("${url}")`;
+      return d;
+    }
+
+    function buildFlowerHead(rng, type, petalColor) {
+      let centreKey, centreSize, petalSet, petalCount, petalW, petalH, radius, angleStart, angleEnd;
+
+      if (type === "ring") {
+        centreKey = pick(rng, ["round-2", "round-3"]);
+        centreSize = 26;
+        petalSet = ASSETS.teardrop;
+        petalCount = pickInt(rng, 5, 6);
+        petalW = 40; petalH = 78;
+        radius = 3; // petals attach close to the centre; their own size does the reaching
+        angleStart = 0; angleEnd = 360;
+      } else if (type === "ring-outward") {
+        // Same daisy shape as "ring", but with a bit more space between the
+        // attachment points and the centre, for a slightly spikier look.
+        centreKey = pick(rng, ["round-2", "round-3"]);
+        centreSize = 26;
+        petalSet = ASSETS.teardrop;
+        petalCount = pickInt(rng, 5, 6);
+        petalW = 34; petalH = 66;
+        radius = 14;
+        angleStart = 0; angleEnd = 360;
+      } else if (type === "bottom-cluster") {
+        centreKey = pick(rng, ["flat-1", "flat-2"]);
+        centreSize = 26;
+        petalSet = ASSETS.teardrop;
+        petalCount = pickInt(rng, 3, 4);
+        petalW = 34; petalH = 64;
+        radius = 10;
+        angleStart = 140; angleEnd = 220;
+      } else {
+        centreKey = "round-3";
+        centreSize = 36;
+        petalSet = ASSETS.rhombus;
+        petalCount = pickInt(rng, 4, 5);
+        petalW = 82; petalH = 82;
+        radius = 5; // petals attach right at the centre
+        angleStart = 0; angleEnd = 360;
+      }
+
+      centreSize *= FLOWER_SCALE;
+      petalW *= FLOWER_SCALE;
+      petalH *= FLOWER_SCALE;
+      radius *= FLOWER_SCALE;
+
+      const headSize = Math.max(centreSize, radius * 2 + Math.max(petalW, petalH));
+      const head = document.createElement("div");
+      head.style.position = "absolute";
+      head.style.left = "50%";
+      head.style.width = `${headSize}px`;
+      head.style.height = `${headSize}px`;
+      head.style.marginLeft = `${-headSize / 2}px`;
+
+      const fullCircle = angleEnd - angleStart >= 360;
+      for (let i = 0; i < petalCount; i++) {
+        const baseAngle = fullCircle
+          ? angleStart + (360 / petalCount) * i
+          : angleStart + (petalCount === 1 ? 0 : ((angleEnd - angleStart) / (petalCount - 1)) * i);
+        const angle = baseAngle + (rng() * 16 - 8); // slight jitter for an organic, hand-placed feel
+        const scale = 0.88 + rng() * 0.3;
+        const w = petalW * scale;
+        const h = petalH * scale;
+
+        const petalUrl = pick(rng, petalSet);
+        const filename = petalUrl.split("/").pop();
+        const pivot = PETAL_PIVOTS[filename] || { pivotX: 0.5, pivotY: 0.5, awayAngle: 0 };
+
+        // Outer: places the petal's pivot point (its measured tip) at
+        // `radius` distance from the centre, at this petal's position angle.
+        const outer = document.createElement("div");
+        outer.style.position = "absolute";
+        outer.style.left = "50%";
+        outer.style.top = "50%";
+        outer.style.transform = `rotate(${angle}deg) translateY(-${radius}px)`;
+
+        // Inner: the actual shape, shifted so its own pivot point (not its
+        // box center) lands on the outer's origin, then rotated by a fixed
+        // amount (independent of position angle) so the shape's "away from
+        // tip" direction points outward once the outer rotation is applied.
+        const inner = document.createElement("div");
+        inner.style.position = "absolute";
+        inner.style.left = "0";
+        inner.style.top = "0";
+        inner.style.width = `${w}px`;
+        inner.style.height = `${h}px`;
+        inner.style.marginLeft = `${-pivot.pivotX * w}px`;
+        inner.style.marginTop = `${-pivot.pivotY * h}px`;
+        inner.style.transformOrigin = `${pivot.pivotX * 100}% ${pivot.pivotY * 100}%`;
+        inner.style.transform = `rotate(${-pivot.awayAngle}deg)`;
+        outer.appendChild(inner);
+
+        const outline = document.createElement("div");
+        outline.className = "petal-outline";
+        outline.style.webkitMaskImage = `url("${petalUrl}")`;
+        outline.style.maskImage = `url("${petalUrl}")`;
+        inner.appendChild(outline);
+
+        const petal = maskedEl(petalUrl, petalColor);
+        petal.classList.add("petal-shape");
+        petal.style.position = "absolute";
+        petal.style.inset = "0";
+        petal.style.width = "100%";
+        petal.style.height = "100%";
+        petal.style.animationDuration = `${1.8 + rng() * 1.6}s`;
+        petal.style.animationDelay = `${rng() * -3}s`;
+        inner.appendChild(petal);
+
+        head.appendChild(outer);
+      }
+
+      const centre = maskedEl(ASSETS.centres[centreKey], pick(rng, DARK_CENTRE_COLORS));
+      centre.style.width = `${centreSize}px`;
+      centre.style.height = `${centreSize}px`;
+      centre.style.left = "50%";
+      centre.style.top = "50%";
+      centre.style.marginLeft = `${-centreSize / 2}px`;
+      centre.style.marginTop = `${-centreSize / 2}px`;
+      head.appendChild(centre);
+
+      return { head, headSize };
+    }
+
+    // Interpolates the stem's centerline (x position + local tangent angle)
+    // at a given fraction along its length, using the precomputed curve
+    // samples in assets/stems/curves.json, so a leaf can attach to the
+    // actual drawn line instead of an assumed straight vertical stem.
+    function sampleStemCurve(stemUrl, frac) {
+      const filename = stemUrl.split("/").pop();
+      const curve = STEM_CURVES[filename];
+      if (!curve || !curve.length) return { x: 0.5, angle: 0 };
+
+      let lo = curve[0], hi = curve[curve.length - 1];
+      for (let i = 0; i < curve.length - 1; i++) {
+        if (curve[i].f <= frac && curve[i + 1].f >= frac) {
+          lo = curve[i]; hi = curve[i + 1];
+          break;
+        }
+      }
+      const span = hi.f - lo.f;
+      const t = span > 0 ? (frac - lo.f) / span : 0;
+      return {
+        x: lo.x + (hi.x - lo.x) * t,
+        angle: lo.angle + (hi.angle - lo.angle) * t,
+      };
+    }
+
+    function buildFlower(idea) {
+      const rng = mulberry32(hashString(idea.title + idea.timestamp));
+      const type = pick(rng, FLOWER_TYPES);
+      const petalColor = pick(rng, ALL_FLOWER_COLORS);
+
+      const stemHeight = pickInt(rng, 160, 220) * FLOWER_SCALE;
+      const stemWidth = 30 * FLOWER_SCALE;
+      const stemUrl = pick(rng, ASSETS.stems);
+
+      const plant = document.createElement("div");
+      plant.className = "flower-plant";
+
+      const { head, headSize } = buildFlowerHead(rng, type, petalColor);
+      const totalHeight = stemHeight + headSize * 0.5;
+      plant.style.width = `${Math.max(headSize, stemWidth) + 50}px`;
+      plant.style.height = `${totalHeight}px`;
+
+      const stem = maskedEl(stemUrl, STEM_GREEN);
+      stem.style.width = `${stemWidth}px`;
+      stem.style.height = `${stemHeight}px`;
+      stem.style.left = "50%";
+      stem.style.bottom = "0";
+      stem.style.marginLeft = `${-stemWidth / 2}px`;
+      plant.appendChild(stem);
+
+      const leafCount = Math.max(0, Math.min(idea.blockers.length, 4));
+      for (let i = 0; i < leafCount; i++) {
+        const leaf = maskedEl(pick(rng, ASSETS.leaves), STEM_GREEN);
+        const leafSize = pickInt(rng, 44, 72) * FLOWER_SCALE;
+        leaf.style.width = `${leafSize}px`;
+        leaf.style.height = `${leafSize}px`;
+
+        // Sample an actual point on the stem's drawn centerline to attach to.
+        const frac = 0.25 + rng() * 0.5;
+        const { x: stemXFrac, angle: tangentAngle } = sampleStemCurve(stemUrl, frac);
+        const attachXPx = (stemXFrac - 0.5) * stemWidth;
+        leaf.style.bottom = `${stemHeight * (1 - frac)}px`;
+        leaf.style.left = `calc(50% + ${attachXPx}px)`;
+        leaf.style.marginLeft = `${-leafSize / 2}px`;
+
+        const side = i % 2 === 0 ? 1 : -1;
+        const kick = side * pickInt(rng, 55, 85);
+        leaf.style.transform = `rotate(${tangentAngle + kick}deg) ${side < 0 ? "scaleX(-1)" : ""}`;
+        leaf.style.transformOrigin = "50% 100%";
+        plant.appendChild(leaf);
+      }
+
+      // Head's own center (where petals/centre pivot from) should land
+      // exactly on the stem's tip — not partway down the stem.
+      head.style.bottom = `${stemHeight - headSize / 2}px`;
+      plant.appendChild(head);
+
+      plant.title = idea.title;
+      plant.addEventListener("click", () => openPopup(idea));
+      return plant;
+    }
 
     function parseIdeas(markdown) {
       const chunks = markdown.split(/\n(?=## )/).map((c) => c.trim()).filter(Boolean);
@@ -227,21 +566,6 @@
         const body = lines.slice(2).join("\n").trim();
         return { title, timestamp, tag, blockers, body };
       });
-    }
-
-    function renderFlowerSvg(colors) {
-      return `
-        <svg viewBox="0 0 100 140">
-          <line x1="50" y1="140" x2="50" y2="60" stroke="#5a8a52" stroke-width="4" />
-          <g transform="translate(50,45)">
-            ${[0, 72, 144, 216, 288].map((angle) => `
-              <ellipse cx="0" cy="-22" rx="12" ry="20" fill="${colors.petal}"
-                transform="rotate(${angle})" />
-            `).join("")}
-            <circle r="12" fill="${colors.center}" />
-          </g>
-        </svg>
-      `;
     }
 
     function openPopup(idea) {
@@ -264,17 +588,26 @@
       document.getElementById("popup-meta").innerHTML = "";
       document.getElementById("popup-body").innerHTML = `
         <p>A garden of my very unorganised ideas, so I always have a source of inspiration lying around. These are hastily written notes, not polished plans.</p>
-        <p><strong>What I see up front:</strong> I send an idea, and a flower spawns. That's it.</p>
+        <p>I write ideas wherever I happen to be — a notebook, a WhatsApp chat, my Notes app, anywhere — then share them here through a Shortcut, as text, an image, or whatever I've got. An LLM reads it and sorts it into a flower.</p>
+        <p><strong>What I see up front:</strong> I send an idea, and a flower grows. That's it.</p>
 
         <p><strong>Under the hood:</strong></p>
         <ol>
-          <li>I share a thought (a note, a dictated ramble, whatever) via an iOS Shortcut.</li>
-          <li>It gets sent to a small Cloudflare Worker, which asks Claude to give it a title, guess a category (electronics / ceramics / art / other), and flag anything I mentioned being blocked on (time, materials, technical, etc.).</li>
-          <li>That gets committed as a new entry to <code>ideas.md</code> in this repo.</li>
-          <li>This page just reads <code>ideas.md</code> and draws each entry as a flower — colored by category, click to read the note.</li>
+          <li>I share a thought — however I've written it, from wherever I've written it — through an iOS Shortcut.</li>
+          <li>It's sent to a small Cloudflare Worker, which asks Claude to give it a title, guess a category (electronics / ceramics / art / other), and pick out anything I mentioned being blocked on (time, materials, technical know-how, funding, and so on — or "unknown" if it's blocked but I didn't say why).</li>
+          <li>That gets committed as a new entry to <code>ideas.md</code> in this repo, straight from the Worker via the GitHub API.</li>
+          <li>This page reads <code>ideas.md</code> on load and draws each entry as its own flower.</li>
         </ol>
-        <p class="placeholder-note">Still a placeholder — the flowers are just CSS shapes for now, I'll swap in real art at some point.</p>
-      `;
+
+        <p><strong>How a flower is built:</strong></p>
+        <ul>
+          <li><strong>Shape</strong> — one of a few petal/centre arrangements, picked per idea.</li>
+          <li><strong>Colour</strong> — random per flower, from a fixed palette.</li>
+          <li><strong>Leaves</strong> — one leaf per thing the idea is blocked on. No blockers, no leaves; three things blocking it, three leaves.</li>
+          <li><strong>Position</strong> — scattered across the field, closer flowers drawn in front of further ones.</li>
+        </ul>
+        <p>Click any flower to read the actual idea behind it.</p>
+\      `;
       document.getElementById("overlay").classList.add("open");
     }
 
@@ -288,12 +621,40 @@
 
     document.getElementById("about-btn").addEventListener("click", openAboutPopup);
 
+    // field.png is 1920x1600, with its sky/hill horizon sampled at ~42% down
+    // the image. background-size:cover + background-position:center top
+    // means the image's top edge sits at the viewport's top, scaled up by
+    // whichever dimension the viewport overflows. This works out where that
+    // horizon actually lands within the #field box, so flower stems never
+    // get placed above it (i.e. never appear to originate in the sky).
+    function computeMaxSafeBottomPercent(fieldEl, fieldHeightPx) {
+      const BG_IMAGE_W = 1920;
+      const BG_IMAGE_H = 1250;
+      const HORIZON_FRACTION = 0.258;
+
+      const scale = Math.max(window.innerWidth / BG_IMAGE_W, window.innerHeight / BG_IMAGE_H);
+      const displayedImageHeight = BG_IMAGE_H * scale;
+      const horizonYInViewport = HORIZON_FRACTION * displayedImageHeight;
+
+      const fieldTop = fieldEl.getBoundingClientRect().top;
+      const horizonWithinField = horizonYInViewport - fieldTop;
+      const safeHeightPx = fieldHeightPx - Math.max(0, Math.min(fieldHeightPx, horizonWithinField));
+      const percent = (safeHeightPx / fieldHeightPx) * 100;
+      return Math.max(10, Math.min(90, percent));
+    }
+
     async function init() {
       const field = document.getElementById("field");
       let ideas = [];
       try {
-        const res = await fetch("./ideas.md", { cache: "no-store" });
-        if (res.ok) ideas = parseIdeas(await res.text());
+        const [ideasRes, curvesRes, pivotsRes] = await Promise.all([
+          fetch("./ideas.md", { cache: "no-store" }),
+          fetch("./assets/stems/curves.json", { cache: "no-store" }),
+          fetch("./assets/petals/pivots.json", { cache: "no-store" }),
+        ]);
+        if (ideasRes.ok) ideas = parseIdeas(await ideasRes.text());
+        if (curvesRes.ok) STEM_CURVES = await curvesRes.json();
+        if (pivotsRes.ok) PETAL_PIVOTS = await pivotsRes.json();
       } catch {
         // network/file access issue — fall through to empty state below
       }
@@ -303,20 +664,40 @@
         return;
       }
 
+      const fieldWidth = field.offsetWidth || window.innerWidth;
+      const fieldHeight = field.offsetHeight || 400;
+      const maxBottomPercent = computeMaxSafeBottomPercent(field, fieldHeight);
+      const placedFootprints = []; // { xPx, yPx, halfWidth } — used to keep flowers from overlapping
+
       ideas.forEach((idea) => {
-        const colors = TAG_COLORS[idea.tag] || TAG_COLORS.other;
-        const size = 70 + Math.min(idea.body.length / 10, 40);
-        const el = document.createElement("div");
-        el.className = "flower";
-        el.style.left = `${2 + Math.random() * 88}%`;
-        el.style.top = `${5 + Math.random() * 75}%`;
-        el.style.width = `${size}px`;
-        el.style.height = `${size * 1.4}px`;
-        el.style.animationDuration = `${3.5 + Math.random() * 2.5}s`;
-        el.style.animationDelay = `${Math.random() * -4}s`;
-        el.innerHTML = renderFlowerSvg(colors);
-        el.title = idea.title;
-        el.addEventListener("click", () => openPopup(idea));
+        const rng = mulberry32(hashString(idea.title + idea.timestamp + "-pos"));
+        const el = buildFlower(idea);
+        const halfWidth = (parseFloat(el.style.width) || 100) / 2;
+
+        let leftPercent, bottomPercent, xPx, yPx, tries = 0;
+        do {
+          leftPercent = 2 + rng() * 88;
+          bottomPercent = rng() * maxBottomPercent; // scattered, but never above the hill's horizon
+          xPx = (leftPercent / 100) * fieldWidth;
+          yPx = (bottomPercent / 100) * fieldHeight;
+          tries++;
+        } while (
+          tries < 60 &&
+          placedFootprints.some((p) => {
+            const dx = p.xPx - xPx;
+            const dy = p.yPx - yPx;
+            return Math.hypot(dx, dy) < (p.halfWidth + halfWidth) * 0.9;
+          })
+        );
+        placedFootprints.push({ xPx, yPx, halfWidth });
+
+        el.style.left = `${leftPercent}%`;
+        el.style.bottom = `${bottomPercent}%`;
+        // Flowers lower in the field read as closer to the viewer, so they
+        // should occlude ones placed higher up (further back).
+        el.style.zIndex = `${Math.round(1000 - bottomPercent * 10)}`;
+        el.style.animationDuration = `${3.5 + rng() * 2.5}s`;
+        el.style.animationDelay = `${rng() * -4}s`;
         field.appendChild(el);
       });
     }
