@@ -33,3 +33,8 @@ A website that’s a garden of these swaying little flowers, where a flower spaw
 _2026-07-09T17:55:57.434Z_ · `art` · `blocked: time, materials, knowledge`
 
 A bag made with old denim. Use the two pairs I don’t wear anymore and turn them into a colour-blocky bag? Don’t have a sewing machine or the time or skill to hand sew it, so maybe do it once im back on campus?
+
+## Clay Apple Core Jewelry Holder
+_2026-07-09T17:57:48.399Z_ · `ceramics` · `blocked: materials`
+
+An Apple core jewelry holder out of clay. Basically upgrade my existing Apple core to have a worm or a longer stem so that I can store my rings. I’ll make it when I have access to the studio again
