@@ -43,3 +43,8 @@ An Apple core jewelry holder out of clay. Basically upgrade my existing Apple co
 _2026-07-09T18:00:18.801Z_ · `electronics` · `blocked: materials, time`
 
 VFD tube clock. Nixie tube clocks are all over but Nixie tubes are hard to find so I’ve bought some VFD tubes. Need a lot of supplies and time for this but I do eventually want to make this
+
+## Denim Wallet with Back Pocket Sleeves
+_2026-07-09T18:19:57.749Z_ · `art`
+
+Actually on the point of upcycling old denim…a wallet with sleeves that look like back pockets of jeans. Could honestly start making right now!
