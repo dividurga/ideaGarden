@@ -29,7 +29,22 @@ _2026-07-08T08:58:19.419Z_ · `other` · `blocked: technical`
 
 A website that’s a garden of these swaying little flowers, where a flower spawns every time I have an idea. Should be seamlessly connected to WhatsApp or notes or somewhere I usually dump thoughts…flower colour and size can be a function of what catergory of idea it is and why I’m blocked. Watering can can indicate ideas I’m working on. Completed ideas can have hyperlinks to blog about ideas. Possibly integrate into my website??? Wordpress might be painful. Working on this rn!
 
-## 09940A5F-5C26-41E0-9FC8-DFB493613BBD
-_2026-07-08T12:16:07.561Z_ · `other` · `blocked: unknown`
+## Denim bag from old jeans
+_2026-07-09T17:55:57.434Z_ · `art` · `blocked: time, materials, knowledge`
 
-09940A5F-5C26-41E0-9FC8-DFB493613BBD
+A bag made with old denim. Use the two pairs I don’t wear anymore and turn them into a colour-blocky bag? Don’t have a sewing machine or the time or skill to hand sew it, so maybe do it once im back on campus?
+
+## Clay Apple Core Jewelry Holder
+_2026-07-09T17:57:48.399Z_ · `ceramics` · `blocked: materials`
+
+An Apple core jewelry holder out of clay. Basically upgrade my existing Apple core to have a worm or a longer stem so that I can store my rings. I’ll make it when I have access to the studio again
+
+## VFD Tube Clock
+_2026-07-09T18:00:18.801Z_ · `electronics` · `blocked: materials, time`
+
+VFD tube clock. Nixie tube clocks are all over but Nixie tubes are hard to find so I’ve bought some VFD tubes. Need a lot of supplies and time for this but I do eventually want to make this
+
+## Denim Wallet with Back Pocket Sleeves
+_2026-07-09T18:19:57.749Z_ · `art`
+
+Actually on the point of upcycling old denim…a wallet with sleeves that look like back pockets of jeans. Could honestly start making right now!
