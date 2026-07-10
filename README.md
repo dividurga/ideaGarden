@@ -1,15 +1,21 @@
 # ideaGarden
 
-A Cloudflare Worker that receives an idea (e.g. shared from your phone via an iOS Shortcut), asks Claude to give it a title, categorize it, and flag any blockers, then commits it as a new entry in `ideas.md` in this repo.
+A Cloudflare Worker that receives an idea (e.g. shared from your phone via an iOS Shortcut), asks Claude to give it a title, categorize it, and flag any blockers, then commits it as a new entry in `ideas.md` in this repo. A garden of flowers is programatically generated using digital art I made on Procreate. 
 
 ## How it works
 
 1. You send a POST request to the Worker with `{"idea": "some text"}` and a shared-secret header.
+
 2. The Worker calls the Anthropic API to generate:
-   - a short title
-   - a `tag` (`electronics`, `ceramics`, `art`, or `other`)
-   - a `blockers` array (e.g. `["time", "materials"]`) if the note mentions being stuck on something
-3. The Worker commits an entry to `ideas.md` in this repo via the GitHub API.
+
+   * a short title
+   * a `tag` (`electronics`, `ceramics`, `art`, or `other`)
+   * a `blockers` array, such as `["time", "materials"]`, when the note mentions something preventing the idea from moving forward
+
+3. The Worker commits the new entry to `ideas.md` in this repository through the GitHub API.
+
+4. Each idea is then visualized as a procedurally assembled flower. I illustrated every petal, leaf, stem, and decorative element myself in Procreate, then exported them as a library of reusable assets. The program randomly combines these handmade elements, along with different colors and flower structures, to generate a large variety of distinct flowers. Carefully defined pivot points allow the pieces to connect naturally and support subtle animations, giving the idea garden a dynamic, organic feel while preserving the character of the original artwork.
+
 
 ## Setup
 
