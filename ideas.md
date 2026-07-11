@@ -48,3 +48,8 @@ VFD tube clock. Nixie tube clocks are all over but Nixie tubes are hard to find 
 _2026-07-09T18:19:57.749Z_ · `art`
 
 Actually on the point of upcycling old denim…a wallet with sleeves that look like back pockets of jeans. Could honestly start making right now!
+
+## Aquatic Patchwork Linocut Upcycled Sweatshirt
+_2026-07-11T10:28:12.897Z_ · `art` · `blocked: time, materials`
+
+Patchwork and linocut prints to upcycle some of the career fair and school merch i never wear. Have an aquatic theme, and go very bold. So perhaps a big bright fish made with scrap fabric that goes from the front of a sweatshirt to the back. Im just not in a very sewing mindset right now but might make this sometime down the line. also dont have access to scrap fabric right now.
