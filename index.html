@@ -132,6 +132,26 @@
       50% { transform: rotate(4deg); }
     }
 
+    .caterpillar {
+      position: absolute;
+      animation: inchworm 2.2s ease-in-out infinite;
+      filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.18));
+    }
+    .caterpillar .segment {
+      bottom: 0;
+    }
+    .caterpillar .antler {
+      position: absolute;
+      width: 1.5px;
+      background: #14100c;
+      border-radius: 2px;
+      transform-origin: bottom center;
+    }
+    @keyframes inchworm {
+      0%, 100% { transform: translateX(0) scaleX(1); }
+      50% { transform: translateX(5px) scaleX(0.9); }
+    }
+
     #empty-state {
       text-align: center;
       color: #6b7d6d;
@@ -193,6 +213,22 @@
     }
     @media (prefers-color-scheme: dark) {
       #popup .pill.blocked { background: #4a2e20; color: #f0b898; }
+    }
+    #popup .pill.done {
+      background: #dcecd6;
+      color: #3c6b3a;
+    }
+    @media (prefers-color-scheme: dark) {
+      #popup .pill.done { background: #24402a; color: #a9d4a4; }
+    }
+    #popup .read-post-link {
+      color: #3c6b3a;
+      font-weight: 600;
+      text-decoration: none;
+    }
+    #popup .read-post-link:hover { text-decoration: underline; }
+    @media (prefers-color-scheme: dark) {
+      #popup .read-post-link { color: #a9d4a4; }
     }
     #popup .body {
       line-height: 1.5;
@@ -304,18 +340,22 @@
       reds: ["#e18356", "#c75865"],
       pinksPurples: ["#cfa19e", "#e48aa0", "#cb7f89", "#a68dae"],
       yellows: ["#e7bb58", "#e8cd7d", "#eec346"],
-      blue: ["#4a90d9"],
+      blues: ["#7ab0e8", "#4a90d9", "#2f6bb0"],
     };
-    const ALL_FLOWER_COLORS = [
-      ...PALETTE.reds,
-      ...PALETTE.pinksPurples,
-      ...PALETTE.yellows,
-      ...PALETTE.blue,
-    ];
+    // Color-coded by category — shades within a hue, not one fixed color.
+    const TAG_PALETTE = {
+      electronics: PALETTE.yellows,
+      ceramics: PALETTE.blues,
+      art: PALETTE.pinksPurples,
+      other: PALETTE.reds,
+    };
     // Warm dark brown/near-black — distinct from the stem's cool dark green
     // so the centre never blends into it where the head overlaps the stem tip.
     const DARK_CENTRE_COLORS = ["#241a12", "#1a120c", "#2e2013"];
     const STEM_GREEN = "#1b2f0f";
+    // A bright lime, deliberately far from the stem's dark green and the
+    // background hills' muted greens, so the caterpillar reads distinctly.
+    const CATERPILLAR_GREEN = "#c3e05c";
     const FLOWER_SCALE = 0.55;
     const FLOWER_TYPES = ["ring", "ring-outward", "bottom-cluster", "big-rhombus"];
     let STEM_CURVES = {};
@@ -504,7 +544,7 @@
     function buildFlower(idea) {
       const rng = mulberry32(hashString(idea.title + idea.timestamp));
       const type = pick(rng, FLOWER_TYPES);
-      const petalColor = pick(rng, ALL_FLOWER_COLORS);
+      const petalColor = pick(rng, TAG_PALETTE[idea.tag] || PALETTE.reds);
 
       const stemHeight = pickInt(rng, 160, 220) * FLOWER_SCALE;
       const stemWidth = 30 * FLOWER_SCALE;
@@ -553,9 +593,85 @@
       head.style.bottom = `${stemHeight - headSize / 2}px`;
       plant.appendChild(head);
 
+      if (idea.completed) {
+        // Wrapper handles static placement/flip; the animation lives on the
+        // inner element so a scaleX(-1) flip doesn't get clobbered by the
+        // keyframes' own transform.
+        const wrap = document.createElement("div");
+        wrap.style.position = "absolute";
+        wrap.style.bottom = "-2px";
+        const side = rng() < 0.5 ? 1 : -1;
+        if (side > 0) {
+          wrap.style.left = `calc(50% + ${8 + rng() * 14}px)`;
+        } else {
+          wrap.style.right = `calc(50% + ${8 + rng() * 14}px)`;
+          wrap.style.transform = "scaleX(-1)";
+        }
+        wrap.appendChild(buildCaterpillar());
+        plant.appendChild(wrap);
+      }
+
       plant.title = idea.title;
       plant.addEventListener("click", () => openPopup(idea));
       return plant;
+    }
+
+    // No hand-drawn caterpillar art exists yet, so this is built from the
+    // same centre PNGs used for flower centres — chained into a row of
+    // overlapping segments and recolored to CATERPILLAR_GREEN.
+    function buildCaterpillar() {
+      const el = document.createElement("div");
+      el.className = "caterpillar";
+      el.title = "done!";
+
+      const segments = [
+        { key: "round-3", size: 10 },
+        { key: "round-2", size: 12 },
+        { key: "round-1", size: 13 },
+        { key: "round-2", size: 12 },
+        { key: "round-3", size: 10 },
+      ];
+      const arcHeight = 11; // how high the middle of the arch rises
+
+      let x = 0;
+      let maxTop = 0;
+      let headX = 0, headTop = 0, headSize = 0;
+      segments.forEach(({ key, size }, i) => {
+        const t = i / (segments.length - 1);
+        const arc = Math.sin(t * Math.PI) * arcHeight; // low at head/tail, high in the middle
+        const seg = maskedEl(ASSETS.centres[key], CATERPILLAR_GREEN);
+        seg.classList.add("segment");
+        seg.style.width = `${size}px`;
+        seg.style.height = `${size}px`;
+        seg.style.left = `${x}px`;
+        seg.style.bottom = `${arc}px`;
+        el.appendChild(seg);
+        if (i === segments.length - 1) {
+          headX = x;
+          headTop = arc + size;
+          headSize = size;
+        }
+        x += size * 0.8; // spaced apart, not lumped together
+        maxTop = Math.max(maxTop, arc + size);
+      });
+
+      // Antlers on the head segment (the last one, since the caterpillar
+      // faces right by default and gets flipped for the other direction).
+      const antlerHeight = 9;
+      [-14, 14].forEach((angle) => {
+        const antler = document.createElement("div");
+        antler.className = "antler";
+        antler.style.left = `${headX + headSize * 0.5}px`;
+        antler.style.bottom = `${headTop - 2}px`;
+        antler.style.height = `${antlerHeight}px`;
+        antler.style.transform = `rotate(${angle}deg)`;
+        el.appendChild(antler);
+      });
+      maxTop += antlerHeight * 0.8;
+
+      el.style.width = `${x + segments[segments.length - 1].size * 0.2}px`;
+      el.style.height = `${maxTop}px`;
+      return el;
     }
 
     function parseIdeas(markdown) {
@@ -572,8 +688,13 @@
         const blockers = blockedMatch
           ? blockedMatch.replace(/`/g, "").replace("blocked:", "").split(",").map((s) => s.trim()).filter(Boolean)
           : [];
+        const completedMatch = pillParts.find((p) => p.includes("completed"));
+        const completed = !!completedMatch;
+        const link = completedMatch
+          ? completedMatch.replace(/`/g, "").replace("completed:", "").trim() || null
+          : null;
         const body = lines.slice(2).join("\n").trim();
-        return { title, timestamp, tag, blockers, body };
+        return { title, timestamp, tag, blockers, completed, link, body };
       });
     }
 
@@ -584,10 +705,27 @@
       if (idea.blockers.length) {
         pills.push(`<span class="pill blocked">blocked: ${idea.blockers.join(", ")}</span>`);
       }
+      if (idea.completed) {
+        pills.push(`<span class="pill done">🐛 done</span>`);
+      }
       const date = new Date(idea.timestamp);
       const dateLabel = isNaN(date) ? idea.timestamp : date.toLocaleString();
       document.getElementById("popup-meta").innerHTML = `${dateLabel}<br>${pills.join(" ")}`;
-      document.getElementById("popup-body").textContent = idea.body;
+
+      const body = document.getElementById("popup-body");
+      body.textContent = idea.body;
+      if (idea.completed && idea.link) {
+        const linkEl = document.createElement("a");
+        linkEl.href = idea.link;
+        linkEl.target = "_blank";
+        linkEl.rel = "noopener noreferrer";
+        linkEl.className = "read-post-link";
+        linkEl.textContent = "Read the post →";
+        body.appendChild(document.createElement("br"));
+        body.appendChild(document.createElement("br"));
+        body.appendChild(linkEl);
+      }
+
       document.getElementById("overlay").classList.add("open");
     }
 
@@ -614,10 +752,11 @@
           <li><strong>Shape</strong> — one of a few petal/centre arrangements, picked per idea.</li>
           <li><strong>Colour</strong> — random per flower, from a fixed palette.</li>
           <li><strong>Leaves</strong> — one leaf per thing the idea is blocked on. No blockers, no leaves; three things blocking it, three leaves.</li>
+          <li><strong>Caterpillar</strong> — shows up once an idea is actually done, sometimes with a link to read more about it.</li>
           <li><strong>Position</strong> — scattered across the field, closer flowers drawn in front of further ones.</li>
         </ul>
         <p>Click any flower to read the actual idea behind it.</p>
-\      `;
+      `;
       document.getElementById("overlay").classList.add("open");
     }
 

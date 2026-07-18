@@ -20,7 +20,7 @@ _2026-07-08T08:54:03.312Z_ · `ceramics` · `blocked: materials`
 A ceramic shoe bcs why not. No studio access right now but will make once back on campus
 
 ## ESP32 Camera in Tin Can
-_2026-07-08T08:55:22.774Z_ · `electronics`
+_2026-07-08T08:55:22.774Z_ · `electronics` · `completed: https://divija.info/2026/07/18/tin-can-camera/`
 
 An ESP32 based camera crammed in a tin can I picked up from London. Working on it right now!
 
