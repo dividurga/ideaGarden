@@ -53,3 +53,8 @@ Actually on the point of upcycling old denim…a wallet with sleeves that look l
 _2026-07-11T10:28:12.897Z_ · `art` · `blocked: time, materials`
 
 Patchwork and linocut prints to upcycle some of the career fair and school merch i never wear. Have an aquatic theme, and go very bold. So perhaps a big bright fish made with scrap fabric that goes from the front of a sweatshirt to the back. Im just not in a very sewing mindset right now but might make this sometime down the line. also dont have access to scrap fabric right now.
+
+## Ceramic Hairpin with Hares Fur Glaze
+_2026-07-28T20:46:18.581Z_ · `ceramics`
+
+A hairpin with hairpiece typa thing out of ceramic. Use the hares fur glaze. Maybe a fish. Or a cat. Or a skull
