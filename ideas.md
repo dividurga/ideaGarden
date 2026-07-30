@@ -58,3 +58,8 @@ Patchwork and linocut prints to upcycle some of the career fair and school merch
 _2026-07-28T20:46:18.581Z_ · `ceramics`
 
 A hairpin with hairpiece typa thing out of ceramic. Use the hares fur glaze. Maybe a fish. Or a cat. Or a skull
+
+## Test Idea For Cristian
+_2026-07-30T19:32:26.979Z_ · `other` · `blocked: unknown`
+
+Test idea for Cristian. Blocked bcs no inspiration
