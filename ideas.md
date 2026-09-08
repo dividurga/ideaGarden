@@ -59,3 +59,8 @@ _2026-07-28T20:46:18.581Z_ · `ceramics`
 
 A hairpin with hairpiece typa thing out of ceramic. Use the hares fur glaze. Maybe a fish. Or a cat. Or a skull
 
+
+## Education Website Using AI Coding Tools
+_2026-09-08T00:23:13.000Z_ · `other` · `blocked: technical`
+
+A cool idea about making a website for education, blocked by access to ai coding tools
