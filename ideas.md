@@ -64,3 +64,8 @@ A hairpin with hairpiece typa thing out of ceramic. Use the hares fur glaze. May
 _2026-09-08T00:23:13.000Z_ · `other` · `blocked: technical`
 
 A cool idea about making a website for education, blocked by access to ai coding tools
+
+## Beach Themed Mug with Shells
+_2026-09-10T23:56:44.337Z_ · `ceramics`
+
+A ceramics mug that is beach themed. Creamy white base with an overlapping coat of shio blue with shells and starfish made using underglaze and wax resist combos
