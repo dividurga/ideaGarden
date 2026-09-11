@@ -69,3 +69,8 @@ A cool idea about making a website for education, blocked by access to ai coding
 _2026-09-10T23:56:44.337Z_ · `ceramics`
 
 A ceramics mug that is beach themed. Creamy white base with an overlapping coat of shio blue with shells and starfish made using underglaze and wax resist combos
+
+## Ceramic mug self-portrait
+_2026-09-11T01:03:45.381Z_ · `ceramics`
+
+A ceramics mug that looks like me. Make out of brown clay because lol. See female alchemy’s work
