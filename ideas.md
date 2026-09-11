@@ -74,3 +74,8 @@ A ceramics mug that is beach themed. Creamy white base with an overlapping coat 
 _2026-09-11T01:03:45.381Z_ · `ceramics`
 
 A ceramics mug that looks like me. Make out of brown clay because lol. See female alchemy’s work
+
+## Whale Lamp With Light Holes
+_2026-09-11T18:55:38.609Z_ · `art`
+
+A lamp that looks a whale. Light pokes out through holes in the upper body
