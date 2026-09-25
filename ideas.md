@@ -79,3 +79,8 @@ A ceramics mug that looks like me. Make out of brown clay because lol. See femal
 _2026-09-11T18:55:38.609Z_ · `art`
 
 A lamp that looks a whale. Light pokes out through holes in the upper body
+
+## Frog Lamp with Porcelain Throat
+_2026-09-25T07:10:07.186Z_ · `ceramics`
+
+A frog lamp with the throat part made of porcelain for a translucent t finish. This is where the bulb goes
