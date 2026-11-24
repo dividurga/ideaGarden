@@ -593,7 +593,7 @@
       head.style.bottom = `${stemHeight - headSize / 2}px`;
       plant.appendChild(head);
 
-      if (idea.completed) {
+      if (idea.completed || idea.inProgress) {
         // Wrapper handles static placement/flip; the animation lives on the
         // inner element so a scaleX(-1) flip doesn't get clobbered by the
         // keyframes' own transform.
@@ -690,11 +690,14 @@
           : [];
         const completedMatch = pillParts.find((p) => p.includes("completed"));
         const completed = !!completedMatch;
-        const link = completedMatch
-          ? completedMatch.replace(/`/g, "").replace("completed:", "").trim() || null
+        const progressMatch = pillParts.find((p) => p.includes("in-progress"));
+        const inProgress = !!progressMatch;
+        const statusMatch = completedMatch || progressMatch;
+        const link = statusMatch
+          ? statusMatch.replace(/`/g, "").replace(/^\s*(completed|in-progress):?/, "").trim() || null
           : null;
         const body = lines.slice(2).join("\n").trim();
-        return { title, timestamp, tag, blockers, completed, link, body };
+        return { title, timestamp, tag, blockers, completed, inProgress, link, body };
       });
     }
 
@@ -707,6 +710,8 @@
       }
       if (idea.completed) {
         pills.push(`<span class="pill done">🐛 done</span>`);
+      } else if (idea.inProgress) {
+        pills.push(`<span class="pill done">🐛 in progress</span>`);
       }
       const date = new Date(idea.timestamp);
       const dateLabel = isNaN(date) ? idea.timestamp : date.toLocaleString();
@@ -714,7 +719,7 @@
 
       const body = document.getElementById("popup-body");
       body.textContent = idea.body;
-      if (idea.completed && idea.link) {
+      if ((idea.completed || idea.inProgress) && idea.link) {
         const linkEl = document.createElement("a");
         linkEl.href = idea.link;
         linkEl.target = "_blank";
@@ -752,7 +757,7 @@
           <li><strong>Shape</strong> — one of a few petal/centre arrangements, picked per idea.</li>
           <li><strong>Colour</strong> — random per flower, from a fixed palette.</li>
           <li><strong>Leaves</strong> — one leaf per thing the idea is blocked on. No blockers, no leaves; three things blocking it, three leaves.</li>
-          <li><strong>Caterpillar</strong> — shows up once an idea is actually done, sometimes with a link to read more about it.</li>
+          <li><strong>Caterpillar</strong> — shows up once an idea is done or actively in progress, sometimes with a link to read more about it.</li>
           <li><strong>Position</strong> — scattered across the field, closer flowers drawn in front of further ones.</li>
         </ul>
         <p>Click any flower to read the actual idea behind it.</p>
