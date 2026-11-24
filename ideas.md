@@ -104,3 +104,8 @@ Ceramics architecture lamp
 _2026-11-24T06:38:03.861Z_ · `ceramics`
 
 Ceramics sip cup that looks like a can
+
+## Tic Tac Toe Set for Lab Manager
+_2026-11-24T06:38:46.513Z_ · `ceramics`
+
+Tic tac toe set for lab manager with crown, sun, and star
