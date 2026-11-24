@@ -89,3 +89,8 @@ A frog lamp with the throat part made of porcelain for a translucent t finish. T
 _2026-11-24T06:36:58.584Z_ · `ceramics` · `blocked: time`
 
 Ceramics converse but looks like a drawing. Blocked by time
+
+## Ceramics Alarm Clock
+_2026-11-24T06:37:18.610Z_ · `ceramics`
+
+Ceramics alarm clock
