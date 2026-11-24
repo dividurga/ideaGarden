@@ -84,3 +84,8 @@ A lamp that looks a whale. Light pokes out through holes in the upper body
 _2026-09-25T07:10:07.186Z_ · `ceramics`
 
 A frog lamp with the throat part made of porcelain for a translucent t finish. This is where the bulb goes
+
+## Ceramic Converse that looks drawn
+_2026-11-24T06:36:58.584Z_ · `ceramics` · `blocked: time`
+
+Ceramics converse but looks like a drawing. Blocked by time
