@@ -99,3 +99,8 @@ Ceramics alarm clock
 _2026-11-24T06:37:35.660Z_ · `ceramics`
 
 Ceramics architecture lamp
+
+## Ceramic Can Sip Cup
+_2026-11-24T06:38:03.861Z_ · `ceramics`
+
+Ceramics sip cup that looks like a can
